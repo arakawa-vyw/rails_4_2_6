@@ -1,5 +1,6 @@
 class AjaxController < ApplicationController
   before_filter :common_process, except: :index
+  layout false, only: :html_get
 
   def index
   end
@@ -12,6 +13,9 @@ class AjaxController < ApplicationController
 
   def ajax_get
     render json: {now: @now}
+  end
+
+  def html_get
   end
 
   private

@@ -7,3 +7,12 @@ $ ->
     })
     # Return false not to work link
     false
+
+  $("#html_get_link").on 'click', ->
+    $.ajax({
+      url: $(this).attr('href')
+      success: (data, status, xhr) ->
+        $(".html_get .result").html data
+    })
+    # Return false not to work link
+    false
