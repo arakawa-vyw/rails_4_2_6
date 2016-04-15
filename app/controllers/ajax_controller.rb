@@ -10,6 +10,10 @@ class AjaxController < ApplicationController
   def form_tag_remote
   end
 
+  def ajax_get
+    render json: {now: @now}
+  end
+
   private
 
   def common_process

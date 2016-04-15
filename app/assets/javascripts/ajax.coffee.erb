@@ -1,0 +1,9 @@
+$ ->
+  $("#ajax_get_link").on 'click', ->
+    $.ajax({
+      url: $(this).attr('href')
+      success: (data, status, xhr) ->
+        $(".ajax_get .result").html data.now
+    })
+    # Return false not to work link
+    false
