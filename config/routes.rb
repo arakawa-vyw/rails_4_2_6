@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'ajax' => 'ajax#index'
+
+  get 'ajax/link_to_remote'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
