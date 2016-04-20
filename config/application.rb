@@ -24,6 +24,19 @@ module Rails426
     config.active_record.raise_in_transactional_callbacks = true
 
     # field_error_proc
-    config.action_view.field_error_proc = Proc.new{ |html_tag, instance| "<div class=\"field_with_errors\">#{html_tag}</div>".html_safe }
+    config.action_view.field_error_proc = Proc.new do |html_tag, instance|
+      if instance.kind_of?(ActionView::Helpers::Tags::Label)
+        html_tag.html_safe
+      else
+        method_name = instance.instance_variable_get(:@method_name)
+        errors = instance.object.errors[method_name]
+        out = ""
+        errors.each do |error|
+          out += "<div class=\"field_error\">#{instance.object.class.human_attribute_name(method_name)} #{error}</div>"
+        end
+        out += "<div class=\"field_with_errors\">#{html_tag}</div>"
+        out.html_safe
+      end
+    end
   end
 end
